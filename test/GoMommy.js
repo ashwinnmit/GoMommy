@@ -14,11 +14,11 @@ describe("GoMommy", ()=>{
         // user account address
         [deployer, owner1] = await ethers.getSigners();
         const GoMommy = await ethers.getContractFactory("GoMommy");
-        goMom = await GoMommy.deploy("Ashwin","Sreelakshmi");
+        goMom = await GoMommy.deploy("Ashwin","Ash");
         // const transaction = await goMom.setNum(10);
         // await transaction.wait();
 
-        const transaction = await goMom.connect(deployer).listDomain("Sreelakshmi.eth",tokens(10));
+        const transaction = await goMom.connect(deployer).listDomain("Ashwin.eth",tokens(10));
         //await transaction.wait();
 
         const num = await goMom.count();
@@ -35,7 +35,7 @@ describe("GoMommy", ()=>{
         })
         it("has a symbol", async ()=>{
             const result2 = await goMom.symbol();
-            expect(result2).to.equal("Sreelakshmi");
+            expect(result2).to.equal("Ash");
         })
         it("Has an Owner", async ()=>{
             let address = await goMom.owner();
@@ -53,7 +53,7 @@ describe("GoMommy", ()=>{
         it("Returns Domain attr", async ()=>{
             let domain = await goMom.domains(0);
             console.log(domain);
-            expect(domain.name).to.equal("Sreelakshmi.eth");
+            expect(domain.name).to.equal("Ashwin.eth");
         })
     })
 
@@ -63,6 +63,9 @@ describe("GoMommy", ()=>{
         const ID = 0;
         const AMT = ethers.utils.parseUnits("10","ether")
         beforeEach(async ()=>{
+            const balfirst = await goMom.checkOwnerBalance();
+            console.log("First balance");
+            console.log(balfirst);
             const transaction = await goMom.connect(owner1).buyDomain(ID, {value : AMT});
             await transaction.wait();
         })
@@ -84,5 +87,7 @@ describe("GoMommy", ()=>{
             console.log(num);
             expect(num).to.equal(0);
         })
+
+        
     })
 })

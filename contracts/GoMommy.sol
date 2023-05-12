@@ -49,4 +49,8 @@ contract GoMommy is ERC721{
     function withdrawEth() public onlyOwner{
         owner.transfer(address(this).balance);
     }
+
+    function checkOwnerBalance() public view returns(uint){
+        return address(owner).balance;
+    }
 }

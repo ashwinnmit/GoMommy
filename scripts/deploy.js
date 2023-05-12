@@ -21,7 +21,7 @@ async function main() {
 
 
   await goMom.connect(deployer).listDomain("Ashwin.eth",tokens(10));
-  await goMom.connect(deployer).listDomain("SreeLakshmi.eth",tokens(10));
+  await goMom.connect(deployer).listDomain("Ash.eth",tokens(10));
   await goMom.connect(deployer).listDomain("Raman.eth",tokens(10));
   await goMom.connect(deployer).listDomain("Padma.eth",tokens(10));
   await goMom.connect(deployer).listDomain("Babu.eth",tokens(10));
@@ -35,6 +35,10 @@ async function main() {
 
   const num = await goMom.count();
   console.log(num);
+
+  const network = await hre.ethers.getDefaultProvider().getNetwork();
+  console.log("Network name=", network.name);
+  console.log("Network chain id=", network.chainId);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
